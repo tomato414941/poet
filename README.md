@@ -2,6 +2,8 @@
 
 A philosophical thinking system that generates thoughts and contemplations.
 
+🌐 **Live Demo**: [poet.up.railway.app](https://poet.up.railway.app)
+
 ## Features
 
 - **Chain of Thoughts**: Each new thought builds upon the previous one
