@@ -19,12 +19,15 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-.env
 
 # Virtual Environment
 venv/
 env/
 ENV/
+.venv
+env.bak/
+venv.bak/
+.env
 
 # IDE
 .idea/
@@ -35,3 +38,6 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# Project specific
+config/api_keys.py

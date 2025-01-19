@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poet</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Poet</h1>
+        </header>
+
+        <main class="max-w-3xl mx-auto">
+            <!-- Latest Thought -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">最新の思考</h2>
+                    <span id="lastUpdateTime" class="text-sm text-gray-500"></span>
+                </div>
+                <div id="latestThought" class="prose lg:prose-lg">
+                    <p class="text-gray-600 italic">思考を読み込んでいます...</p>
+                </div>
+            </div>
+
+            <!-- Thought History -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">思考の履歴</h2>
+                <div id="thoughtHistory" class="space-y-6">
+                    <p class="text-gray-600 italic">履歴を読み込んでいます...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 text-gray-600">
+            <p>10分ごとに新しい思考が生成されます</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
