@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, APIRouter
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -14,27 +14,23 @@ from .poet import Poet
 # Load environment variables
 load_dotenv()
 
+# Create API router
+api_router = APIRouter(prefix="/api")
+
 app = FastAPI(
     title="Poet API",
     description="""
     A philosophical thinking system API.
-    
-    The system automatically generates new philosophical thoughts every 10 minutes.
-    Each thought builds upon the previous one, creating a continuous chain of philosophical exploration.
-    
-    The thought generation starts automatically when the server starts.
-    Use these endpoints to access the generated thoughts.
-    """,
-    version="1.0.0"
+    """
 )
 
-# Enable CORS
+# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Allow all origins
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
 )
 
 # Hold Poet instance as a singleton
@@ -58,7 +54,7 @@ class ThoughtResponse(BaseModel):
             }
         }
 
-@app.get("/thoughts", response_model=List[ThoughtResponse], tags=["thoughts"])
+@api_router.get("/thoughts", response_model=List[ThoughtResponse], tags=["thoughts"])
 async def get_thoughts():
     """
     Get the complete history of all generated thoughts.
@@ -68,7 +64,7 @@ async def get_thoughts():
     """
     return thoughts_history
 
-@app.get("/thoughts/latest", response_model=ThoughtResponse, tags=["thoughts"])
+@api_router.get("/thoughts/latest", response_model=ThoughtResponse, tags=["thoughts"])
 async def get_latest_thought():
     """
     Get the most recent thought.
@@ -101,5 +97,8 @@ async def startup_event():
     # Start the continuous thinking process
     asyncio.create_task(poet.think_forever())
 
-# Mount static files
+# Include API router
+app.include_router(api_router)
+
+# Mount static files - must be after API routes
 app.mount("/", StaticFiles(directory="static", html=True), name="static")

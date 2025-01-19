@@ -1,5 +1,6 @@
 // API endpoints
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = window.location.origin;
+const API_PATH = '/api';  // Add API path prefix
 
 // DOM Elements
 const latestThoughtElement = document.getElementById('latestThought');
@@ -50,8 +51,8 @@ function createThoughtElement(thought) {
 
 // API Endpoints
 const ENDPOINTS = {
-    LATEST: `${API_BASE_URL}/thoughts/latest`,
-    ALL: `${API_BASE_URL}/thoughts`
+    LATEST: `${API_BASE_URL}${API_PATH}/thoughts/latest`,
+    ALL: `${API_BASE_URL}${API_PATH}/thoughts`
 };
 
 // Fetch and display the latest thought
